@@ -26,7 +26,7 @@ class MARCModel < ASpaceExport::ExportModel
     if uri && !uri.empty?
 			public_url = "https://aspace.ohiohistory.org" << uri
       df!('856', '4', '2').with_sfs(
-                                    ['z', "Online record available:"],
+                                    ['z', "View record in ArchivesSpace:"],
                                     ['u', public_url]
                                   )
     end

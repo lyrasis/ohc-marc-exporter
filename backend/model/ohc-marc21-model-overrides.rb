@@ -22,22 +22,11 @@ class MARCModel < ASpaceExport::ExportModel
     :finding_aid_description_rules => df_handler('fadr', '040', ' ', ' ', 'e')
   }
 
-  attr_accessor :id_string
-
-  def self.from_resource(obj, opts = {})
-    marc = self.from_archival_object(obj, opts)
-    marc.apply_map(obj, @resource_map)
-    marc.leader_string = "00000np$aa2200000 u 4500"
-    marc.leader_string[7] = obj.level == 'item' ? 'm' : 'c'
-
-    marc.controlfield_string = assemble_controlfield_string(obj)
-
-    marc.id_string = obj.id_0.to_s + obj.id_1.to_s + obj.id_2.to_s + obj.id_3.to_s
-
-    marc
-  end
-
   def handle_id(*ids)
+    ids.reject!{|i| i.nil? || i.empty?}
+    unless ids.empty?
+      df('591', ' ', ' ').with_sfs(['a', ids.join('.')])
+    end
   end
 
   def handle_public_url(uri)

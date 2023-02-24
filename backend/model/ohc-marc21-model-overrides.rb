@@ -15,7 +15,7 @@ class MARCModel < ASpaceExport::ExportModel
   
 	@resource_map = {
     [:id_0, :id_1, :id_2, :id_3] => :handle_id,
-    [:ead_location] => :handle_ead_loc,
+    [:ead_location, :publish, :uri, :slug] => :handle_ead_loc,
     [:ark_name] => :handle_ark,
     [:uri] => :handle_public_url,
     :notes => :handle_notes,
